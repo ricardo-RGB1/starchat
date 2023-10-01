@@ -2,7 +2,10 @@ import { UserButton } from "@clerk/nextjs";
 
 const RootPage = () => {
     return ( 
-        <UserButton />
+        <div>
+            <UserButton afterSignOutUrl="https://chatjelly-ai.vercel.app/" />
+        </div>
+        
      );
 }
  
