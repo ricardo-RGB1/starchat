@@ -1,24 +1,25 @@
 "use client";
 
-import { Menu, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
+import MobileSidebar from "./mobile-sidebar";
 
 const Navbar = () => {
   return (
     <div className="h-16 fixed w-full z-50 flex justify-between items-center py-2 px-4 border-b border-primary/10 bg-secondary">
       {/* <div className="flex justify-between items-center m-auto w-full  xl:w-[1200px]"> */}
         <div className="flex items-center">
-          <Menu className="block md:hidden" />
+          <MobileSidebar /> 
           <Link href="/">
             <Image
-              height={120}
+              height={120} 
               width={120}
               alt="Logo"
-              src="/starchatGold.svg"
+              src="/new_starchat.svg"
               className="md:block hidden"
             />
           </Link>
