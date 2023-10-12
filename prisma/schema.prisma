@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextIndex", "fullTextSearch"] 
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Category {
+  id   String @id @default(uuid())
+  name String
+
+  companions Companion[]
+}
+
+model Companion {
+  id           String @id @default(uuid())
+  userId       String
+  userName     String
+  src          String
+  name         String @db.Text
+  description  String
+  instructions String @db.Text
+  seed         String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  // The category field is related to the Category model.
+  //  It defines a relation between two fields categoryId and id.
+  //  The @relation attribute specifies that the categoryId field is a relation field that references the id field of the Category model.
+  // The categoryId field is a foreign key that references the id field of another model and can be used to retrieve data from that model. 
+  // The references attribute specifies the name of the field that the categoryId field references, which is id in this case.
+
+  @@index([categoryId])
+  @@fulltext([name])
+}

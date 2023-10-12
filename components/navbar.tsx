@@ -11,7 +11,7 @@ import MobileSidebar from "./mobile-sidebar";
 const Navbar = () => {
   return (
     <div className="h-16 fixed w-full z-50 flex justify-between items-center py-2 px-4 border-b border-primary/10 bg-secondary">
-      {/* <div className="flex justify-between items-center m-auto w-full  xl:w-[1200px]"> */}
+      <div className="flex justify-between items-center m-auto w-full  xl:w-[1200px]">
         <div className="flex items-center">
           <MobileSidebar /> 
           <Link href="/">
@@ -24,7 +24,7 @@ const Navbar = () => {
             />
           </Link>
         </div>
-        <div className="flex items-center gap-x-3 ">
+        <div className="flex items-center gap-x-3">
           <Button size="sm" variant="premium">
             Free Upgrade
             <Sparkles className="h-4 w-4 fill-white text-white ml-2" />
@@ -32,7 +32,7 @@ const Navbar = () => {
           <ModeToggle />
           <UserButton />
         </div>
-      {/* </div> */}
+    </div>
     </div>
   );
 };

@@ -25,7 +25,6 @@ const SearchInput = () => {
     setValue(e.target.value);
   };
 
-
   // update the URL query parameters whenever the debounceValue or categoryId state changes.
   useEffect(() => {
     // 1. create the query parameters
@@ -47,7 +46,6 @@ const SearchInput = () => {
     router.push(url);
   }, [debounceValue, categoryId, router]);
 
-  
   return (
     <div className="relative">
       <Search className="absolute h-4 w-4 top-3 left-4 text-muted-foreground" />
@@ -55,7 +53,7 @@ const SearchInput = () => {
         onChange={onChange}
         value={value}
         placeholder="Search..."
-        className="pl-10 bg-primary/10"
+        className="pl-10 bg-primary/10 w-full xl:w-[1100px]"
       />
     </div>
   );
