@@ -8,7 +8,7 @@ const db = new PrismaClient() // Create a new PrismaClient instance
         await db.category.createMany({ // Create some default categories using the "category.createMany" method of the PrismaClient
             data: [
                 {name: "Famous People"},
-                {name: "Movies & TV"},
+                {name: "Business"},
                 {name: "Musicians"},
                 {name: "Philosophy"},
                 {name: "Scientists"},
