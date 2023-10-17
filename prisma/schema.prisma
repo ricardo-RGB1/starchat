@@ -40,6 +40,28 @@ model Companion {
   // The categoryId field is a foreign key that references the id field of another model and can be used to retrieve data from that model. 
   // The references attribute specifies the name of the field that the categoryId field references, which is id in this case.
 
+  messages Message[] // The messages field is related to the Message model, by referencing the companionId field of the Message model.
+
   @@index([categoryId])
-  @@fulltext([name])
+  @@fulltext([name]) 
+}
+
+enum Role {
+  user
+  system
+}
+
+model Message {
+  id        String @id @default(uuid())
+  role      Role
+  content  String @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  companionId String // The companionId field is a foreign key that references the id field of another model and can be used to retrieve data from that model.
+  userId     String
+
+  companion Companion @relation(fields: [companionId], references: [id], onDelete: Cascade) // onDelete: Cascade means that when a Companion is deleted, all the messages related to it will be deleted as well. The companion field is related to the Companion model, by referencing the id field of the Companion model.
+
+  @@index([companionId]) // The @@index attribute specifies that the companionId field is an index.
 }
