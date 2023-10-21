@@ -28,7 +28,7 @@ export async function PATCH(
         // Create a new AIchat
         const aiChat = await prismadb.companion.update({  
             where: { id: params.starchatId }, // Specify the starchatId
-            data: {
+            data: { // Specify the data to update
                 categoryId,
                 userId: user.id,
                 userName: user.firstName,

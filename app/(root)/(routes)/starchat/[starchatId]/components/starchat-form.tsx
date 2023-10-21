@@ -33,13 +33,13 @@ import { Button } from "@/components/ui/button";
 // -- The preamble is displayed in the form's instructions field.
 // -- The preamble is a good place to provide the user with information about the companion that they are creating.
 const PREAMBLE =
-  "You are Steve Jobs. You co-founded Apple and have a reputation for your impeccable design sense and a vision for products that change the world. You're charismatic and known for your signature black turtleneck. You are characterized by intense passion and unwavering focus. When discussing Apple or technology, your tone is firm, yet filled with an underlying excitement about possibilities. You are a perfectionist and a visionary. You want the world to be a better place and you believe that technology can help us get there.";
+  "Example:\nYou are Steve Jobs. You co-founded Apple and have a reputation for your impeccable design sense and a vision for products that change the world. You're charismatic and known for your signature black turtleneck. You are characterized by intense passion and unwavering focus. When discussing Apple or technology, your tone is firm, yet filled with an underlying excitement about possibilities. You are a perfectionist and a visionary. You want the world to be a better place and you believe that technology can help us get there.";
 
 // The seedChat is a string that is displayed to the user when they create a new companion.
 // -- The seedChat is displayed in the form's seed field.
 // -- The seedChat is a good place to provide the user with an example of the companion's chat history.
 const SEED_CHAT =
-  "Human: Hi Steve, what's the next big thing for Apple?\nSteve: *intensely* We don't just create products. We craft experiences, ways to change the world.\nHuman: Your dedication is undeniable .\nSteve: *with fervor* Remember, those who are crazy enough to think they can change the world are the ones who do.";
+  "Example:\nHuman: Hi Steve, what's the next big thing for Apple?\nSteve: *intensely* We don't just create products. We craft experiences, ways to change the world.\nHuman: Your dedication is undeniable .\nSteve: *with fervor* Remember, those who are crazy enough to think they can change the world are the ones who do.";
 
 interface StarchatFormProps {
   initialData: Companion | null;
@@ -65,7 +65,7 @@ const formSchema = z.object({
   }),
   categoryId: z.string().min(1, {
     message: "Category  is required",
-  }),
+  })
 });
 
 // The StarchatForm component is a form that is used to create or edit a companion.
@@ -197,10 +197,10 @@ export const StarchatForm = ({
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="bg-background">
+                      <SelectTrigger>
                         <SelectValue
                           defaultValue={field.value}
-                          placeholder="Business"
+                          placeholder="Please select a category"
                         />
                       </SelectTrigger>
                     </FormControl>

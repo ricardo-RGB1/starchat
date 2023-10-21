@@ -1,4 +1,4 @@
-// page.tsx is the root page of the app and is the first page that is loaded when the app is loaded. It is also a server component that is rendered on the server side and has access to the database.
+// page.tsx is the root page of the app and is the first page the user sees when the app is loaded. It is also a server component that is rendered on the server side and has access to the database.
 
 import SearchInput from "@/components/search-input";
 import prismadb from "@/lib/prismadb";
@@ -8,7 +8,6 @@ import Companions from "@/components/companions";
 
 interface RootPageProps {
   searchParams: {
-    //
     categoryId: string;
     name: string;
   };
