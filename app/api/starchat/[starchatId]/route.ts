@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { currentUser } from "@clerk/nextjs";
+import { auth, currentUser } from "@clerk/nextjs";
 import prismadb from "@/lib/prismadb";
 
 export async function PATCH(
@@ -8,7 +8,7 @@ export async function PATCH(
     ){
     try {
         const body = await req.json(); // Get the body of the request
-        const user = await currentUser() // Get the current user
+        const user = await currentUser() // Get the current user from Clerk
         const { src, name, description, instructions, seed, categoryId } = body;
 
         if(!params.starchatId){ // Check if the starchatId is provided
@@ -27,7 +27,10 @@ export async function PATCH(
         
         // Create a new AIchat
         const aiChat = await prismadb.companion.update({  
-            where: { id: params.starchatId }, // Specify the starchatId
+            where: { 
+                id: params.starchatId, // Specify the AIchat to update
+                userId: user.id // Specify the user who created the AIchat
+             },
             data: { // Specify the data to update
                 categoryId,
                 userId: user.id,
@@ -49,6 +52,34 @@ export async function PATCH(
     }
 }
 
+// DELETE function for the AIchat
+export async function DELETE(
+    request: Request,
+    {params}: {params: {starchatId: string}}
+){
+    try {
+        const { userId } = auth();
+
+        if(!userId){
+            return new NextResponse("Unauthorized", {status: 401});
+        }
+
+        // Delete the AIchat from the database
+        // Can only be deleted by the user who created it
+        const companion = await prismadb.companion.delete({ 
+            where: {
+                userId,
+                id: params.starchatId
+            }
+        })
+
+        return NextResponse.json(companion);
+
+    } catch (error) {
+        console.log("[STARCHAT_DELETE]", error);
+        return new NextResponse("Internal Error", {status: 500});
+    }
+}
 
 // EXPLANATION FOR: return NextResponse.json(aiChat);
 // NextResponse.json() is a static method of the NextResponse class. Static methods are called on the class itself, rather than on an instance of the class.

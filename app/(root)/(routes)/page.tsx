@@ -3,7 +3,6 @@
 import SearchInput from "@/components/search-input";
 import prismadb from "@/lib/prismadb";
 import Categories from "@/components/categories";
-import AIchats from "@/components/companions";
 import Companions from "@/components/companions";
 
 interface RootPageProps {
@@ -15,7 +14,7 @@ interface RootPageProps {
 
 const RootPage = async ({ searchParams }: RootPageProps) => {
     
-  const data = await prismadb.companion.findMany({
+  const data = await prismadb.companion.findMany({ // Query the database for all companions
     where: {
       categoryId: searchParams.categoryId,
       name: {
