@@ -40,6 +40,7 @@ const ChatForm = ({
         <SendHorizonal className="h-6 w-6" />
       </Button>
     </form>
+
   );
 };
 
